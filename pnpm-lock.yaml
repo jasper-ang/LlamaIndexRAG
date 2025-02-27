@@ -29,6 +29,9 @@ importers:
       '@codemirror/view':
         specifier: ^6.35.3
         version: 6.35.3
+      '@llamaindex/qdrant':
+        specifier: ^0.1.2
+        version: 0.1.2(gpt-tokenizer@2.8.1)(typescript@5.6.3)
       '@llamaindex/readers':
         specifier: ^2.0.2
         version: 2.0.2(@llamaindex/core@0.5.2(gpt-tokenizer@2.8.1))(@llamaindex/env@0.1.28(gpt-tokenizer@2.8.1))(bufferutil@4.0.8)
@@ -1134,6 +1137,9 @@ packages:
   '@llamaindex/openai@0.1.54':
     resolution: {integrity: sha512-C1r5PleKcIihiDQ9mCCVVBwmub/hT4o8Yi97U9KNR2u0oSOVXfuYWuxx9ViYiiYG4GnnwO5DqmEGzlC32TR5oA==}
 
+  '@llamaindex/qdrant@0.1.2':
+    resolution: {integrity: sha512-RBEr6jGqOjTF4AmQ6MLQ7JYbvUjEd34S9SJ89AFYIMRjxJU7N418PDUFVVN5N2z5d+qROFF0pGT+dvWP4YgqLA==}
+
   '@llamaindex/readers@2.0.2':
     resolution: {integrity: sha512-O+Hv8FhK+jpNes4fscX+gFUcb5EY1SFJjA92n82TYWwjBP0KV7fF53RdPkg6EVTUpBrB/bX3c/fFAbpfFaURSw==}
     peerDependencies:
@@ -1237,6 +1243,16 @@ packages:
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
+
+  '@qdrant/js-client-rest@1.13.0':
+    resolution: {integrity: sha512-bewMtnXlGvhhnfXsp0sLoLXOGvnrCM15z9lNlG0Snp021OedNAnRtKkerjk5vkOcbQWUmJHXYCuxDfcT93aSkA==}
+    engines: {node: '>=18.0.0', pnpm: '>=8'}
+    peerDependencies:
+      typescript: '>=4.7'
+
+  '@qdrant/openapi-typescript-fetch@1.2.6':
+    resolution: {integrity: sha512-oQG/FejNpItrxRHoyctYvT3rwGZOnK4jr3JdppO/c78ktDvkWiPXPHNsrDf33K9sZdRb6PR7gi4noIapu5q4HA==}
+    engines: {node: '>=18.0.0', pnpm: '>=8'}
 
   '@radix-ui/number@1.1.0':
     resolution: {integrity: sha512-V3gRzhVNU1ldS5XhAPTom1fOIo4ccrjjJgmE+LI2h/WaFpHmx0MQApT+KZHnx8abG6Avtfcz4WoEciMnpFT3HQ==}
@@ -1628,6 +1644,9 @@ packages:
 
   '@selderee/plugin-htmlparser2@0.11.0':
     resolution: {integrity: sha512-P33hHGdldxGabLFjPPpaTxVolMrzrcegejx+0GxjrIb9Zv48D8yAIA/QTDR2dFl7Uz7urX8aX6+5bCZslr+gWQ==}
+
+  '@sevinf/maybe@0.5.0':
+    resolution: {integrity: sha512-ARhyoYDnY1LES3vYI0fiG6e9esWfTNcXcO6+MPJJXcnyMV3bim4lnFt45VXouV7y82F4x3YH8nOQ6VztuvUiWg==}
 
   '@swc/counter@0.1.3':
     resolution: {integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==}
@@ -5119,6 +5138,20 @@ snapshots:
       - ws
       - zod
 
+  '@llamaindex/qdrant@0.1.2(gpt-tokenizer@2.8.1)(typescript@5.6.3)':
+    dependencies:
+      '@llamaindex/core': 0.5.2(gpt-tokenizer@2.8.1)
+      '@llamaindex/env': 0.1.28(gpt-tokenizer@2.8.1)
+      '@qdrant/js-client-rest': 1.13.0(typescript@5.6.3)
+    transitivePeerDependencies:
+      - '@aws-crypto/sha256-js'
+      - '@huggingface/transformers'
+      - gpt-tokenizer
+      - js-tiktoken
+      - pathe
+      - tiktoken
+      - typescript
+
   '@llamaindex/readers@2.0.2(@llamaindex/core@0.5.2(gpt-tokenizer@2.8.1))(@llamaindex/env@0.1.28(gpt-tokenizer@2.8.1))(bufferutil@4.0.8)':
     dependencies:
       '@azure/cosmos': 4.2.0
@@ -5230,6 +5263,15 @@ snapshots:
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
+
+  '@qdrant/js-client-rest@1.13.0(typescript@5.6.3)':
+    dependencies:
+      '@qdrant/openapi-typescript-fetch': 1.2.6
+      '@sevinf/maybe': 0.5.0
+      typescript: 5.6.3
+      undici: 5.28.4
+
+  '@qdrant/openapi-typescript-fetch@1.2.6': {}
 
   '@radix-ui/number@1.1.0': {}
 
@@ -5605,6 +5647,8 @@ snapshots:
     dependencies:
       domhandler: 5.0.3
       selderee: 0.11.0
+
+  '@sevinf/maybe@0.5.0': {}
 
   '@swc/counter@0.1.3': {}
 
