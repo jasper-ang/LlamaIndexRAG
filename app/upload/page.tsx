@@ -1,34 +1,54 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function TestRAGPage() {
-  const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [parsedText, setParsedText] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState(null);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch("/api/rag");
-        const json = await res.json();
-        setData(json);
-      } catch (err: any) {
-        setError(err.message || "Error fetching data");
-      } finally {
-        setLoading(false);
+  const handleFileUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    setUploadError(null);
+
+    // Use FormData to send the file to our API route
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch("/api/rag/pdfparse", {
+        method: "POST",
+        body: formData,
+      });
+      const json = await res.json();
+      if (res.ok) {
+        setParsedText(json.parsedText);
+      } else {
+        setUploadError(json.message || "Error parsing PDF");
       }
+    } catch (error) {
+      setUploadError(error.message || "Error uploading file");
+    } finally {
+      setUploading(false);
     }
-    fetchData();
-  }, []);
-
-  if (loading) return <p>Loading test results...</p>;
-  if (error) return <p>Error: {error}</p>;
+  };
 
   return (
     <div>
       <h1>RAG Test Results</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+
+      <h2>Upload PDF for Parsing</h2>
+      <input type="file" accept="application/pdf" onChange={handleFileUpload} />
+      {uploading && <p>Uploading and parsing PDF...</p>}
+      {uploadError && <p style={{ color: "red" }}>Error: {uploadError}</p>}
+      {parsedText && (
+        <div>
+          <h3>Parsed Text:</h3>
+          <pre>{parsedText}</pre>
+        </div>
+      )}
     </div>
   );
 }
