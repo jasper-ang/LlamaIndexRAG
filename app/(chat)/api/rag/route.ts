@@ -5,11 +5,11 @@ import { Document, VectorStoreIndex } from "llamaindex";
 import { z } from "zod";
 
 // Create an index from your documents
-const document = new Document({
-  text: "The author is Kenji, and Kenji studied computer science at Manchester",
-  id_: "unique-id"
-});
-const index = await VectorStoreIndex.fromDocuments([document]);
+// const document = new Document({
+//   text: "The author is Kenji, and Kenji studied computer science at Manchester",
+//   id_: "unique-id"
+// });
+// const index = await VectorStoreIndex.fromDocuments([document]);
 
 // Define the query tool
 export const queryTool = tool({
