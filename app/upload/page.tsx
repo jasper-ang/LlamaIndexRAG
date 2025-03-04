@@ -23,7 +23,7 @@ export default function TestRAGPage() {
     }
 
     try {
-      const res = await fetch("/api/rag/pdfparse", {
+      const res = await fetch("/api/rag", {
         method: "POST",
         body: formData,
       });
