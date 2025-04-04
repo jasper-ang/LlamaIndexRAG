@@ -73,7 +73,7 @@ export default function TestRAGPage() {
 
   return (
     <div className="min-h-screen p-8 bg-gradient-to-bl from-pink-900/10 via-indigo-900/30 to-pink-900/10">
-      <div className="max-w-4xl mx-auto my-8 overflow-hidden backdrop-blur-sm bg-zinc-800/10 shadow-2xl px-8 py-10 sm:px-32">
+      <div className="max-w-4xl mx-auto my-16 overflow-hidden backdrop-blur-sm bg-zinc-800/10 shadow-2xl px-8 py-10 sm:px-32">
         <h1 className="text-lg sm:text-xl  text-center font-semibold mb-4 text-indigo-200 tracking-wide">
           Upload PDF for Analysis
         </h1>
