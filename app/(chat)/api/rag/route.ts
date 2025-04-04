@@ -12,40 +12,6 @@ import { QdrantVectorStore } from "@llamaindex/qdrant";
 
 const TEMP_DIR = "./tmp";
 
-// Define the query tool
-// export const queryTool = tool({
-//   description:
-//     "Search through document knowledge base and retrieve relevant information",
-//   parameters: z.object({
-//     query: z.string().describe("The question or query about the document content"),
-//   }),
-//   execute: async ({ query }) => {
-//     const queryEngine = sampleIndex.asQueryEngine();
-//     const response = await queryEngine.query({ query });
-//     return {
-//       answer: response.message.content,
-//       sources: response.sourceNodes
-//         ? response.sourceNodes.map((node) => {
-//             const doc = node.node as unknown as Document;
-//             const content = (doc as any).text || "";
-//             return {
-//               id: doc.id_,
-//               content:
-//                 content.substring(0, 150) + (content.length > 150 ? "..." : ""),
-//               relevanceScore: node.score || 0,
-//             };
-//           })
-//         : [],
-//       metadata: {
-//         totalSources: response.sourceNodes?.length || 0,
-//         queryTimestamp: new Date().toISOString(),
-//       },
-//     };
-//   },
-// });
-
-
-
 // PDF Processing Functions
 async function processPDF(file: File, query: string | null): Promise<any> {
   // Ensure temporary directory exists
@@ -113,17 +79,6 @@ async function processPDF(file: File, query: string | null): Promise<any> {
     queryResult: queryResult?.toString()
   };
 }
-
-// API GET handler - Test the RAG functionality with sample document
-// export async function GET() {
-//   try {
-//     const results = await runRAGTest();
-//     return NextResponse.json({ success: true, results });
-//   } catch (error: any) {
-//     console.error("Error in GET:", error);
-//     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
-//   }
-// }
 
 // API POST handler - Process PDF uploads and optional querying
 export async function POST(req: Request): Promise<Response> {
